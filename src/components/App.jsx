@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from './Box';
 import Section from './Section/Section';
+import Form from './Form/Form';
 // import FeedbackOptions from './Feedback/Feedback';
 // import Statistics from './Statistics/Statistics';
 
@@ -12,27 +13,15 @@ export class App extends React.Component {
     name: '',
   };
 
-  handleNameChange = event => {
-    console.log(event.currentTarget.value);
-    this.setState({ name: event.currentTarget.value });
+  formSubmitHandler = data => {
+    console.log(data);
   };
 
   render() {
     return (
       <Box position="relative" as="main">
         <Section title="Please leave feedback">Phonebook </Section>
-        <Box>
-          <form>
-            <label>
-              Name
-              <input
-                type="text"
-                value={this.state.name}
-                onChange={this.handleNameChange}
-              />
-            </label>
-          </form>
-        </Box>
+        <Form onSubmit={this.formSubmitHandler} />
 
         <Section title="Statistics">Contacts </Section>
         {/* {!this.state.visible && (
