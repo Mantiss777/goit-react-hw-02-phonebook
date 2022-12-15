@@ -2,6 +2,7 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix';
 import Form from './Form/Form';
+import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 
 export class App extends React.Component {
@@ -35,14 +36,26 @@ export class App extends React.Component {
     }));
   };
 
+  handleInputChange = e => {
+    e.preventDefault();
+    this.setState({ filter: e.currentTarget.value });
+  };
+
   render() {
-    const { contacts } = this.state;
+    const { contacts, filter } = this.state;
+    const filteredContacts = contacts.filter(it =>
+      it.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
     return (
       <div>
         <Form addContact={this.addContact} />
-
-        <ContactList contacts={contacts} deleteContact={this.deleteContact} />
+        <Filter filter={filter} onChange={this.handleInputChange} />
+        <ContactList
+          contacts={contacts}
+          deleteContact={this.deleteContact}
+          filteredContacts={filteredContacts}
+        />
       </div>
     );
   }

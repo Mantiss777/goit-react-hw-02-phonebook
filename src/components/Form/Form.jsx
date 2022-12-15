@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import css from './Form.module.css';
+import PropTypes from 'prop-types';
 
 class Form extends Component {
   state = {
-    contacts: [],
     name: '',
     number: '',
   };
@@ -59,3 +59,7 @@ class Form extends Component {
 }
 
 export default Form;
+
+Form.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
